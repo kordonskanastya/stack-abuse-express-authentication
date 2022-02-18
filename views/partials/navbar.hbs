@@ -1,0 +1,20 @@
+<nav class="blue darken-4">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">Advertisements</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+      {{#if isIndex}}
+      <li class="active"><a href="/pages/protected">Advertisements</a></li>
+      {{else}}
+      <li><a href="/pages/protected">Advertisements</a></li>
+      {{/if}}
+
+      {{#if isCreate}}
+      <li class="active"><a href="/pages/create">Create</a></li>
+      {{else}}
+      <li><a href="/pages/create">Create</a></li>
+      {{/if}}
+
+    </ul>
+  </div>
+</nav>

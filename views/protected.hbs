@@ -1,7 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Protected Page</a>
-</nav>
+<h2>Advertisements page</h2>
 
-<div>
-    <h2>This page is only visible to logged in users</h2>
-</div>
+{{#if allAdds.length}}
+<ul>
+  {{#each allAdds}}
+  <li class="advertisement">
+    <form action="/pages/complete" method="POST">
+      <label>
+        {{#if completed}}
+        <input type="checkbox" checked name="completed">
+        <span class="completed">{{title}}</span>
+        <br>
+        <span class="completed">{{text}}</span>
+        {{else}}
+        <input type="checkbox" name="completed">
+        <span>{{title}}</span>
+        <br>
+        <span>{{text}}</span>
+        {{/if}}
+        <input type="hidden" value="{{id}}" name="id">
+        <br>
+        <button class="btn btn-small" type="submit">Done</button>
+      </label>
+    </form>
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<p>No advertisements!</p>
+{{/if}}

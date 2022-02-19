@@ -1,5 +1,9 @@
 const express = require('express');
-const {createAdvertisement, getAllAdvertisements} = require('../db');
+const {
+  createAdvertisement,
+  getAllAdvertisements,
+  completeAdvertisement
+} = require('../db');
 
 const pages = express.Router();
 
@@ -43,7 +47,20 @@ pages.post('/create', async (req, res) => {
     if (!flag) {
       res.render('create');
     }
-    res.render('protected');
+    res.redirect('protected');
+  } else {
+      res.render('login', {
+          message: 'Please login to continue',
+          messageClass: 'alert-danger'
+      });
+  }
+});
+
+pages.post('/complete', async (req, res) => {
+  if (req.user) {
+    const {id} = req.body;
+    await completeAdvertisement(id);
+    res.redirect('protected');
   } else {
       res.render('login', {
           message: 'Please login to continue',

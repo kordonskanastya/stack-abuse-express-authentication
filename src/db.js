@@ -79,9 +79,25 @@ async function getAllAdvertisements (token) {
   }
 };
 
+async function completeAdvertisement (id) {
+  try {
+    const boolTrue = 'true';
+    const res = await client.query(
+      `UPDATE advertisements SET completed=$1
+      WHERE id = $2`,
+      [boolTrue, id]
+    );
+    return res.rows[0];
+  } catch (err) {
+    console.error(err.message || err);
+    throw err;
+  }
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   createAdvertisement,
   getAllAdvertisements,
+  completeAdvertisement,
 };
